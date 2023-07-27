@@ -5,17 +5,18 @@ import "./App.css";
 function App() {
   const [events, setEvents] = useState([]);
   const [count, setCount] = useState(0);
+  const [error, setError] = useState("");
 
   const handleClick = async () => {
     try {
-      const response = await fetch("http://localhost:8000/api/v1/events");
+      const response = await fetch(`${process.env.REACT_APP_API}api/v1/events`);
       const { events, count } = await response.json();
       console.log({ events });
       setCount(count);
       setEvents(events);
-      console.log("render");
     } catch (error) {
       console.log("Something went wrong:", error);
+      setError(`Something went wrong: ${error.message}`);
     }
   };
 
@@ -35,6 +36,8 @@ function App() {
       >
         Render
       </button>
+
+      {!!error && <p>{error}</p>}
 
       {!!count && <p>Count: {count}</p>}
 
