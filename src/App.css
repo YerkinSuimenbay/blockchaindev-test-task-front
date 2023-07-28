@@ -51,3 +51,8 @@ button {
   padding: 2px 5px;
   cursor: pointer;
 }
+
+tr:first-of-type {
+  position: sticky;
+  top: 0;
+}
